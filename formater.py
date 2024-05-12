@@ -6,8 +6,9 @@ def format_schedule_one_day(schedule):
     if len(schedule) == 0:
         return "В этот день нет пар, отдыхаем!"
 
-    res = schedule[0]['date_start'].split("T")[0] + "\n\n"
-    res += """Пары на сегодня:"""
+    # res = schedule[0]['date_start'].split("T")[0] + "\n\n"
+    res = ''
+    # res += """Пары на сегодня:"""
 
     for lesson in schedule:
         time_start = str(int(lesson['date_start'].split("T")[1].split(":")[0]) + UTC_PLUS) + ":" + \
@@ -33,9 +34,9 @@ def format_schedule_active(schedule):
     if len(schedule) == 0:
         return "Сейчас нет пар"
 
-    res = schedule[0]['date_start'].split("T")[0] + "\n\n"
-    res += """Ближайшие и текущие пары:"""
-
+    res_list = []
+    res = ""
+    dd = ''
     for lesson in schedule:
         time_start = str(int(lesson['date_start'].split("T")[1].split(":")[0]) + UTC_PLUS) + ":" + \
                      lesson['date_start'].split("T")[1].split(":")[1]
@@ -44,7 +45,7 @@ def format_schedule_active(schedule):
                    lesson['date_end'].split("T")[1].split(":")[1]
         date_str = lesson['date_start']
         pdate = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
-        date = pdate.strftime("%d %B %Y")
+        date = pdate.strftime("%d %B")
         res += """
 Дата: %s
 Дисциплина: %s - %s
