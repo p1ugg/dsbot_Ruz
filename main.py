@@ -1,3 +1,5 @@
+from pprint import pprint
+
 import discord
 from discord.ext import commands
 
@@ -94,9 +96,12 @@ async def get_schedule_week(ctx, email=None):
         formatted_date_week = week.strftime("%Y-%m-%d")
         schedule_not_formated = ruz.get_student_schedule(email, formatted_date_today, formatted_date_week, 1)
         schedule_formated = formater.format_schedule_active(schedule_not_formated)
-        print(schedule_formated)
+
         if schedule_formated != "Сейчас нет пар":
-            await ctx.send(f"Пары с {formatted_date_today} по {formatted_date_week}:\n{schedule_formated}")
+            await ctx.send(f"Пары с {formatted_date_today} по {formatted_date_week}:\n")
+            for elem in schedule_formated:
+                await ctx.send(elem)
+
         else:
             await ctx.send("Сейчас нет пар")
 

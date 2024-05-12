@@ -36,7 +36,9 @@ def format_schedule_active(schedule):
 
     res_list = []
     res = ""
-    dd = ''
+    dd = schedule[0]['date_start']
+    pp = datetime.fromisoformat(dd.replace("Z", "+00:00"))
+    dd = pp.strftime("%d %B")
     for lesson in schedule:
         time_start = str(int(lesson['date_start'].split("T")[1].split(":")[0]) + UTC_PLUS) + ":" + \
                      lesson['date_start'].split("T")[1].split(":")[1]
@@ -46,6 +48,10 @@ def format_schedule_active(schedule):
         date_str = lesson['date_start']
         pdate = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
         date = pdate.strftime("%d %B")
+        if date != dd:
+            res_list.append(res)
+            res = ''
+            dd = date
         res += """
 Дата: %s
 Дисциплина: %s - %s
@@ -58,8 +64,8 @@ def format_schedule_active(schedule):
 
         res += "\n--------------\n"
 
-    return res
 
+    return res_list
 
 # def format_students_list(students_list):
 #     res = ""
