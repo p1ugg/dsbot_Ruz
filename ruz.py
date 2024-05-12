@@ -28,9 +28,9 @@ def get_student_schedule(email, start_date, end_date, lng): # ('254711', '2020.0
     r = requests.get(url, params=params, headers=headers)
     return json.loads(r.text)
 
-a = get_student_schedule("iegazzaev@edu.hse.ru", "2024.05.13", "2024.05.13", 1)
-pprint(a)
-print(formater.format_schedule_one_day(a))
+# a = get_student_schedule("iegazzaev@edu.hse.ru", "2024.05.13", "2024.05.20", 1)
+# pprint(a)
+# print(formater.format_schedule_active(a))
 
 def get_group_schedule(group_id, start_date, end_date, lng): # ('254711', '2020.09.28','2020.10.04', 1)
     params = { 'start': start_date,

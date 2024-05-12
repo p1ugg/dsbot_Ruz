@@ -14,17 +14,6 @@ async def on_ready():
     print("Ready!")
 
 
-# @bot.command()
-# async def ping(ctx):
-#     await ctx.send('pong')
-
-
-@bot.command()
-async def get_list(ctx):
-    names = get_names()
-    await ctx.send(names)
-
-
 @bot.command()
 async def get_file(ctx):
     def check_func(message: discord.Message) -> bool:
@@ -54,5 +43,7 @@ async def get_file(ctx):
 
     # await user_message.reply(f'Hello, {user_message.author.mention}!')
 
-
+@bot.command()
+async def get_schedule_today(ctx, email=None):
+    pass
 bot.run(token)
