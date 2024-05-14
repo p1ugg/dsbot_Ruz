@@ -65,3 +65,11 @@ def format_schedule_active(schedule):
         res += "\n--------------\n"
 
     return res_list
+
+
+def format_mes(keys_of_materials):
+    list_of_keys = """"""
+    for i in range(len(list(keys_of_materials.keys()))):
+        list_of_keys += str(i + 1) + ". " + list(keys_of_materials)[i] + '\n'
+
+    return list_of_keys
