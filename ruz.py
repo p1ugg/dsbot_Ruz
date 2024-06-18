@@ -8,8 +8,6 @@ from datetime import date
 
 main_url = "https://ruz.hse.ru"
 
-
-
 def get_student_schedule(email, start_date, end_date, lng):
     params = { 'start': start_date,
                'end': end_date,

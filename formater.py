@@ -7,21 +7,30 @@ def format_schedule_one_day(schedule):
         return "В этот день нет пар, отдыхаем!"
 
     res = ''
-
     for lesson in schedule:
         time_start = str(int(lesson['date_start'].split("T")[1].split(":")[0]) + UTC_PLUS) + ":" + \
                      lesson['date_start'].split("T")[1].split(":")[1]
 
         time_end = str(int(lesson['date_end'].split("T")[1].split(":")[0]) + UTC_PLUS) + ":" + \
                    lesson['date_end'].split("T")[1].split(":")[1]
-        res += """
-Дисциплина: %s - %s
-Корпус: %s 
-Время: %s - %s
-Аудитория: %s
-Преподователь: %s (%s)""" % (
-            lesson['discipline'], lesson['type'], lesson['building'], time_start, time_end, lesson['auditorium'],
-            lesson['lecturer_profiles'][0]['full_name'], lesson['lecturer_profiles'][0]['email'])
+        try:
+            res += """
+    Дисциплина: %s - %s
+    Корпус: %s 
+    Время: %s - %s
+    Аудитория: %s
+    Преподователь: %s (%s)""" % (
+                lesson['discipline'], lesson['type'], lesson['building'], time_start, time_end, lesson['auditorium'],
+                lesson['lecturer_profiles'][0]['full_name'], lesson['lecturer_profiles'][0]['email'])
+        except Exception as ex:
+            res += """
+    Дисциплина: %s - %s
+    Корпус: %s 
+    Время: %s - %s
+    Аудитория: %s
+    Преподователь: %s (%s)""" % (
+    lesson['discipline'], 'None',lesson['building'], time_start, time_end, lesson['auditorium'],
+    lesson['lecturer_profiles'][0]['full_name'], lesson['lecturer_profiles'][0]['email'])
 
         res += "\n--------------\n"
 

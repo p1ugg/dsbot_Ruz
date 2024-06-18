@@ -21,10 +21,24 @@ keys_of_materials = {
 }
 
 
+help_msg = """
+Доступные команды:
+>bot_help  - Доступные команды
+>get_file - Получить файл, который необходим пользователю
+>get_schedule_today <email> - Выводит расписание на сегодня
+>get_schedule_tomorrow <email> - Выводит расписание на завтра
+>get_schedule_week <email> - Выводит расписание на неделю - считая с сегодняшнего дня
+>get_teacher - Получить информацию о преподавателях"""
 
 @bot.event
 async def on_ready():
-    print("Ready!")
+    print('Бот готов к работе')
+
+
+
+@bot.command()
+async def bot_help(ctx):
+    await ctx.send(help_msg)
 
 
 @bot.command()
@@ -116,5 +130,9 @@ async def get_schedule_week(ctx, email=None):
         else:
             await ctx.send("Сейчас нет пар")
 
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send("Похоже, такой команды не существует. Введите >bot_help для списка доступных команд.")
 
 bot.run(token)
